@@ -8,13 +8,17 @@ public class Client {
     private String cpf;
     private String name;
     private int age;
-    private List<Account> accounts;
+    private String password;
+    private CheckingAccount checkingAccount;
+    private SavingsAccount savingsAccount;
 
-    public Client(String cpf, String name, int age) {
+    public Client(String cpf, String name, int age, String password) {
         this.cpf = cpf;
         this.name = name;
         this.age = age;
-        this.accounts = new ArrayList<>(2);
+        this.password = password;
+        this.checkingAccount = new CheckingAccount();
+        this.savingsAccount = new SavingsAccount();
     }
 
     public String getCpf() {
@@ -39,5 +43,13 @@ public class Client {
 
     public void setAge(int age) {
         this.age = age;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

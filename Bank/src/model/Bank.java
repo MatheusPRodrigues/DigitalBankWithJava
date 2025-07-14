@@ -5,12 +5,16 @@ import java.util.List;
 
 public class Bank {
 
-    private String name;
+    private final String name;
     private List<Client> clients;
 
     public Bank(String name) {
         this.name = name;
         this.clients = new ArrayList<>();
+    }
+
+    public List<Client> getClients() {
+        return clients;
     }
 
     public void addClienteInBank(Client client) {

@@ -2,50 +2,44 @@ package dao;
 
 import model.Bank;
 import model.Client;
-import validation.SignUpValidation;
+import services.ClientServices;
 
-import java.util.List;
 import java.util.Scanner;
 
-public class ClienteDao {
+public class ClientDao {
     private static final Scanner scanner = new Scanner(System.in);
 
-    public static void signUp(Bank bank, List<Client> clients) {
-        // CPF insertion
-        String cpf = "";
+    public static void signUp(Bank bank) {
+        // *** CPF insertion ***
+        String cpf;
         do {
             System.out.println("Digite seu CPF: ");
             cpf = scanner.nextLine();
 
-            if (SignUpValidation.cpfValidation(cpf, clients)) {
-                break;
-            } else {
-                System.out.println("CPF Inválido! Tente novamente!");
-            }
-        } while (true);
+        } while (!ClientServices.cpfValidation(cpf, bank.getClients(), 1));
 
-        // Name insertion
+        // *** Name insertion ***
         String name;
         do {
             System.out.println("Insira seu nome: ");
             name = scanner.nextLine();
 
-            if (SignUpValidation.nameValidation(name)) {
+            if (ClientServices.nameValidation(name)) {
                 break;
             } else {
                 System.out.println("Nome Inválido! Tente novamente!");
             }
         } while (true);
 
-        // Age insertion
-        int age = 0;
+        // *** Age insertion ***
+        int age;
         do {
             System.out.println("Insira sua idade: ");
             String input = scanner.nextLine();
 
             try {
                 age = Integer.parseInt(input);
-                if (SignUpValidation.ageValidation(age)) {
+                if (ClientServices.ageValidation(age)) {
                     break;
                 } else {
                     return;
@@ -55,8 +49,17 @@ public class ClienteDao {
             }
         } while (true);
 
-        clients.add(new Client(cpf, name, age));
-        bank.addClienteInBank(new Client(cpf, name, age));
+        // *** Pass insertion ***
+        String pass;
+        do {
+            System.out.println("Insira sua senha (entre 6 a 8 caracteres):");
+            pass = scanner.nextLine();
+
+        } while (!ClientServices.passValidation(pass));
+
+        Client client = new Client(cpf, name, age, pass);
+
+        bank.addClienteInBank(client);
 
         System.out.println("Usuário cadastrado com sucesso!\nPressione 'Enter' tecla para continuar...");
         scanner.nextLine();

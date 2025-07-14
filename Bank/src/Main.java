@@ -1,18 +1,15 @@
-import dao.ClienteDao;
+import dao.ClientDao;
 import model.Bank;
-import model.Client;
+import ui.LogInUi;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 public class Main {
     private static final Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
-        List<Client> clients = new ArrayList<>();
         Bank bank = new Bank("Santander");
-        int option = 0;
+        int option;
 
         do {
             System.out.println("[1] - Informações do Banco");
@@ -25,7 +22,8 @@ public class Main {
 
             switch (option) {
                 case 1 -> bank.bankInfos();
-                case 2 -> ClienteDao.signUp(bank, clients);
+                case 2 -> ClientDao.signUp(bank);
+                case 3 -> LogInUi.LogInInterface(bank);
                 case 0 -> {
                     System.out.println("Sistema encerrado!");
                     System.exit(0);
