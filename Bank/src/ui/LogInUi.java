@@ -2,7 +2,7 @@ package ui;
 
 import model.Bank;
 import model.Client;
-import services.ClientServices;
+import service.ClientServices;
 
 import java.util.Scanner;
 
@@ -32,7 +32,7 @@ public class LogInUi {
         if (client == null) {
             System.out.println("CPF ou Senha inválidos! Tente novamente!");
         } else {
-            ClientUi.clientInterface(client);
+            ClientUi.clientInterface(client, bank);
         }
     }
 

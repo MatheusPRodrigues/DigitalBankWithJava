@@ -2,7 +2,7 @@ package dao;
 
 import model.Bank;
 import model.Client;
-import services.ClientServices;
+import service.ClientServices;
 
 import java.util.Scanner;
 

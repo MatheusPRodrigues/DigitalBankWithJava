@@ -15,21 +15,11 @@ public sealed abstract class Account permits CheckingAccount, SavingsAccount{
         this.sald = 0;
     }
 
-    private String checkAccount() {
-        if (this.getClass().getName().equals("CheckingAccount"))
-            return "Conta Corrente";
-
-        return "Conta Poupança";
+    public double getSald() {
+        return sald;
     }
 
-    public void showInfo() {
-
-        System.out.println("===== " + checkAccount() + " =====");
-        System.out.println("Agência: " + this.agency);
-        System.out.println("Nº - " + this.agencyNumber);
-        System.out.println("Saldo: " + String.format("%.2f", this.sald));
-        System.out.println("====================");
-    }
+    public abstract void showInfo();
 
     public abstract void deposit(double value);
 

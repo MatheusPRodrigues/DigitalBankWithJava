@@ -1,6 +1,5 @@
-package services;
+package service;
 
-import model.Bank;
 import model.Client;
 
 import java.util.List;

@@ -52,4 +52,12 @@ public class Client {
     public void setPassword(String password) {
         this.password = password;
     }
+
+    public CheckingAccount getCheckingAccount() {
+        return checkingAccount;
+    }
+
+    public SavingsAccount getSavingsAccount() {
+        return savingsAccount;
+    }
 }
