@@ -9,6 +9,7 @@ Um sistema bancário simples, construído em modo console em Java para fins educ
 
 ### 👤 **Clientes**
 - ✅ Cadastro e autenticação via CPF e senha
+- ✅ Validação de CPF com 11 dígitos (somente números)
 - 🔒 Acesso seguro a contas corrente e poupança
 
 ### 💰 **Operações Bancárias**

@@ -14,7 +14,7 @@ public class LogInUi {
         // *** CPF insertion ***
         String cpf;
         do {
-            System.out.println("Digite seu CPF: ");
+            System.out.println("Digite seu CPF (somente números): ");
             cpf = scanner.nextLine();
 
         } while (!ClientServices.cpfValidation(cpf, bank.getClients(), 0));

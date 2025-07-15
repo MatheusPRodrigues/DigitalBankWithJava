@@ -128,7 +128,7 @@ public class AccountService {
 
         String cpf;
         do {
-            System.out.println("Digite o CPF do destinatario: ");
+            System.out.println("Digite o CPF do destinatario (somente números): ");
             cpf = scanner.nextLine();
 
             if (checkActualClientCPF(currentClient, cpf)) return;
