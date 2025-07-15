@@ -2,6 +2,7 @@ import dao.ClientDao;
 import model.Bank;
 import ui.LogInUi;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Main {
@@ -16,9 +17,13 @@ public class Main {
             System.out.println("[2] - Cadastrar-se");
             System.out.println("[3] - Logar");
             System.out.println("[0] - Sair");
-            option = scanner.nextInt();
 
-
+            try {
+                option = scanner.nextInt();
+            } catch (InputMismatchException | IndexOutOfBoundsException e) {
+                option = -1;
+                scanner.nextLine();
+            }
 
             switch (option) {
                 case 1 -> bank.bankInfos();

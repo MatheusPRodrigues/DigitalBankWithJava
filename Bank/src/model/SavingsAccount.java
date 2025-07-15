@@ -20,7 +20,6 @@ public final class SavingsAccount extends Account {
     @Override
     public void deposit(double value) {
         this.sald += value;
-        this.actionsToday++;
     }
 
     @Override
@@ -32,7 +31,6 @@ public final class SavingsAccount extends Account {
     @Override
     public void withdraw(double value) {
         this.sald -= value;
-        this.actionsToday++;
     }
 
     public int getDAILY_ACTIONS() {
@@ -41,5 +39,9 @@ public final class SavingsAccount extends Account {
 
     public int getActionsToday() {
         return actionsToday;
+    }
+
+    public void setActionsToday() {
+        this.actionsToday++;
     }
 }

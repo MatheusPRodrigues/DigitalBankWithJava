@@ -32,7 +32,7 @@ public class ClientServices {
     }
 
     public static boolean nameValidation(String name) {
-        if (name.matches(".*\\\\d.*")) return false;
+        if (name.matches(".*\\d+.*")) return false;
 
         return !(name.isEmpty() | name.isBlank());
     }

@@ -43,6 +43,13 @@ public class AccountService {
         }
     }
 
+    private static void incrementActionsTodaySavingsAccount(Account account) {
+        if (account.getClass().getSimpleName().equals("SavingsAccount")) {
+            SavingsAccount savingsAccount = (SavingsAccount) account;
+            savingsAccount.setActionsToday();
+        }
+    }
+
     public static void deposit(Account account) {
         if (account.getClass().getSimpleName().equals("SavingsAccount")) {
             SavingsAccount savingsAccount = (SavingsAccount) account;
@@ -74,9 +81,10 @@ public class AccountService {
 
         System.out.println("Depóstio de R$" + String.format("%.2f",deposit) + " realizado!");
         account.deposit(deposit);
+        incrementActionsTodaySavingsAccount(account);
     }
 
-    public static double withdraw(Account account) {
+    public static double withdraw(Account account, boolean isOneWithdraw) {
         if (account.getClass().getSimpleName().equals("SavingsAccount")) {
             SavingsAccount savingsAccount = (SavingsAccount) account;
 
@@ -89,7 +97,7 @@ public class AccountService {
         double witdraw;
 
         do {
-            System.out.println("Insira o valor de depósito: ");
+            System.out.println("Insira o valor: ");
 
             try {
                 if (scanner.hasNextDouble()) {
@@ -107,11 +115,13 @@ public class AccountService {
             }
         } while (true);
 
+        if (isOneWithdraw) incrementActionsTodaySavingsAccount(account);
+
         return witdraw;
     }
 
     public static void transfer(Account account, List<Client> clientList, Client currentClient) {
-        double transferenceValue = withdraw(account);
+        double transferenceValue = withdraw(account, false);
         if (transferenceValue == 0) return;
 
         scanner.nextLine();
@@ -120,7 +130,10 @@ public class AccountService {
         do {
             System.out.println("Digite o CPF do destinatario: ");
             cpf = scanner.nextLine();
-        } while (!ClientServices.cpfValidation(cpf, clientList, 0) && checkActualClientCPF(currentClient, cpf));
+
+            if (checkActualClientCPF(currentClient, cpf)) return;
+
+        } while (!ClientServices.cpfValidation(cpf, clientList, 0));
 
 
         Client destinatary = searchClient(clientList, cpf);
@@ -148,11 +161,13 @@ public class AccountService {
             switch (option) {
                 case 1 -> {
                     account.transfer(transferenceValue, destinatary.getCheckingAccount());
+                    incrementActionsTodaySavingsAccount(account);
                     System.out.println("Transferência realizada com sucesso!");
                     return;
                 }
                 case 2 ->{
                     account.transfer(transferenceValue, destinatary.getSavingsAccount());
+                    incrementActionsTodaySavingsAccount(account);
                     System.out.println("Transferência realizada com sucesso!");
                     return;
                 }

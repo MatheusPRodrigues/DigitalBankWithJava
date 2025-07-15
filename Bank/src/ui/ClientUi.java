@@ -3,6 +3,7 @@ package ui;
 import model.Bank;
 import model.Client;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class ClientUi {
@@ -16,7 +17,13 @@ public class ClientUi {
             System.out.println("[1] - Conta corrente");
             System.out.println("[2] - Conta poupança");
             System.out.println("[0] - Sair");
-            option = scanner.nextInt();
+
+            try {
+                option = scanner.nextInt();
+            } catch (InputMismatchException | IndexOutOfBoundsException e) {
+                option = -1;
+                scanner.nextLine();
+            }
 
             switch (option) {
                 case 1 -> AccountActionsUi.accountUi(client.getCheckingAccount(), bank.getClients(), client);
